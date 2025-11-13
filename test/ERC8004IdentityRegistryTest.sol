@@ -16,16 +16,9 @@ contract ERC8004IdentityRegistryTest is Test {
     function testRegisterAndMetadata() public {
         // Register a new identity
         string memory tokenURI = "https://example.com/agent/1";
-        ERC8004IdentityRegistry.MetadataEntry[]
-            memory metadata = new ERC8004IdentityRegistry.MetadataEntry[](2);
-        metadata[0] = ERC8004IdentityRegistry.MetadataEntry({
-            key: "name",
-            value: bytes("Agent One")
-        });
-        metadata[1] = ERC8004IdentityRegistry.MetadataEntry({
-            key: "role",
-            value: bytes("validator")
-        });
+        ERC8004IdentityRegistry.MetadataEntry[] memory metadata = new ERC8004IdentityRegistry.MetadataEntry[](2);
+        metadata[0] = ERC8004IdentityRegistry.MetadataEntry({key: "name", value: bytes("Agent One")});
+        metadata[1] = ERC8004IdentityRegistry.MetadataEntry({key: "role", value: bytes("validator")});
 
         uint256 agentId = identityRegistry.register(tokenURI, metadata);
 
@@ -70,11 +63,6 @@ contract ERC8004IdentityRegistryTest is Test {
         // Attempt to set metadata from a different address
         vm.prank(alice);
         vm.expectRevert("Caller is not the owner of the token");
-        identityRegistry.setMetadata(
-            agentId,
-            "name",
-            bytes("Hacker Agent")
-        );
+        identityRegistry.setMetadata(agentId, "name", bytes("Hacker Agent"));
     }
-    
 }
