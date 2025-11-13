@@ -7,6 +7,8 @@ import "../src/ERC8004IdentityRegistry.sol";
 contract ERC8004IdentityRegistryTest is Test {
     ERC8004IdentityRegistry identityRegistry;
 
+    address alice = vm.addr(1);
+
     function setUp() public {
         identityRegistry = new ERC8004IdentityRegistry();
     }
@@ -60,4 +62,19 @@ contract ERC8004IdentityRegistryTest is Test {
         string memory retrievedTokenURI = identityRegistry.tokenURI(agentId);
         assertEq(retrievedTokenURI, "");
     }
+
+    function testSetMetadaNonOwner() public {
+        // Register a new identity
+        uint256 agentId = identityRegistry.register();
+
+        // Attempt to set metadata from a different address
+        vm.prank(alice);
+        vm.expectRevert("Caller is not the owner of the token");
+        identityRegistry.setMetadata(
+            agentId,
+            "name",
+            bytes("Hacker Agent")
+        );
+    }
+    
 }
