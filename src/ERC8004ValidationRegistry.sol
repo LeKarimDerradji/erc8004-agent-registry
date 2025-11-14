@@ -9,9 +9,9 @@ contract ERC8004ValidationRegistry {
     event ValidationUpdated(uint256 indexed agentId, bool isValid);
 
     // Function to set or update validation status
-    function setValidation(uint256 agentId, bool isValid) public {
-        _validations[agentId] = isValid;
-        emit ValidationUpdated(agentId, isValid);
+    function setValidation(uint256 agentId, bool valid) public {
+        _validations[agentId] = valid;
+        emit ValidationUpdated(agentId, valid);
     }
 
     // Function to get the validation status of an agent
