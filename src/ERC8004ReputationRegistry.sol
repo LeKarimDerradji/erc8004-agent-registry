@@ -188,10 +188,7 @@ contract ERC8004ReputationRegistry {
 
         _responses[agentId][clientAddress][feedbackIndex].push(
             Response({
-                responder: msg.sender,
-                responseUri: responseUri,
-                responseHash: responseHash,
-                timestamp: block.timestamp
+                responder: msg.sender, responseUri: responseUri, responseHash: responseHash, timestamp: block.timestamp
             })
         );
 
