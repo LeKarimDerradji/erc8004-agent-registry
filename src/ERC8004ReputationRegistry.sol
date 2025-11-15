@@ -74,7 +74,7 @@ contract ERC8004ReputationRegistry {
         identityRegistryAddress = _identityRegistryAddress;
     }
 
-    function getIdentityRegistryAddress() public view returns (address) {
+    function getIdentityRegistry() public view returns (address) {
         return identityRegistryAddress;
     }
 
